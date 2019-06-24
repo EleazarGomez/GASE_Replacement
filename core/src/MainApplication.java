@@ -1,5 +1,6 @@
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class MainApplication
 {
@@ -9,7 +10,8 @@ public class MainApplication
 			public void run()
 			{
 				JFrame frame = new Frame("GASE Replacement Application");
-				frame.setSize(500, 400);
+				frame.setSize(900, 600);
+				frame.setMinimumSize(new Dimension(900, 600));
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);
 			}
