@@ -23,14 +23,40 @@ public class Frame extends JFrame
 		
 		// Text Areas
 		inputTextArea = new JTextArea(14, 40);
+		inputTextArea.setFont(new Font("Consolas", Font.PLAIN, 14));
+		inputTextArea.setTabSize(4);
+		
+		/* FOR TESTING */
+		inputTextArea.setText("public class ParticipantSO implements StringSerializable {\r\n" + 
+				"    private String m_participantID;\r\n" + 
+				"    private String m_name;\r\n" + 
+				"    private String m_group;\r\n" + 
+				"    private String m_software;\r\n" + 
+				"    private String m_version;\r\n" + 
+				"    private int m_availability;\r\n" + 
+				"    private int m_capacity;\r\n" + 
+				"    private long m_lastSeen;\r\n" + 
+				"    private long m_lastUpdated;\r\n" + 
+				"    private int m_valid;\r\n" + 
+				"    private int m_disabled;\r\n" + 
+				"    private int m_activeTestcases;\r\n" + 
+				"    private String m_levelOfAutomation;\r\n" + 
+				"    private String m_excludedParticipants;\r\n" + 
+				"    private String m_capabilities;\r\n" + 
+				"\r\n" + 
+				"    private String m_excludedParticipantsShadowField;\r\n" + 
+				"    private Set m_excludedParticipantsSet;\r\n" + 
+				"    private String m_capabilitiesShadowField;\r\n" + 
+				"    private ParticipantConstants.Capability[] m_capabilitiesSet;");
+		/* FOR TESTING */
+		
 		outputTextArea = new JTextArea(10, 40);
-		inputScroll = new JScrollPane (inputTextArea, 
-				                       JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-				                       JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		outputScroll = new JScrollPane (outputTextArea, 
-				                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-				                        JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		outputTextArea.setFont(new Font("Consolas", Font.PLAIN, 14));
+		outputTextArea.setTabSize(4);
 		outputTextArea.setEditable(false);
+		
+		inputScroll = new JScrollPane (inputTextArea);
+		outputScroll = new JScrollPane (outputTextArea);
 		
 		// Generate button
 		generateButton = new JButton("Generate");
@@ -82,7 +108,10 @@ public class Frame extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				outputTextArea.append("Hello\n");
+				String data = inputTextArea.getText();
+				Logic lo = new Logic();
+				String result = lo.getResult(data);
+				outputTextArea.setText(result);
 			}
 		});
 	}
