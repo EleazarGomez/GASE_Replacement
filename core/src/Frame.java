@@ -4,52 +4,67 @@ import java.awt.event.*;
 
 public class Frame extends JFrame
 {
+	private static final long serialVersionUID = 1L;
+	
+	private JTextArea inputTextArea;
+	private JTextArea outputTextArea;
+	private JScrollPane inputScroll;
+	private JScrollPane outputScroll;
+	private JButton generateButton;
+	private JLabel inputLabel;
+	private JLabel outputLabel;
+	private JPanel inputPane;
+	private JPanel outputPane;
+	private JPanel buttonPane;
+	
 	public Frame(String title)
 	{
 		super(title);
 		
 		// Text Areas
-		final JTextArea inputTextArea = new JTextArea(14, 40);
-		final JTextArea outputTextArea = new JTextArea(10, 40);
-		JScrollPane inputScroll = new JScrollPane (inputTextArea, 
-				   JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		JScrollPane outputScroll = new JScrollPane (outputTextArea, 
-				   JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		inputTextArea = new JTextArea(14, 40);
+		outputTextArea = new JTextArea(10, 40);
+		inputScroll = new JScrollPane (inputTextArea, 
+				                       JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				                       JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		outputScroll = new JScrollPane (outputTextArea, 
+				                        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				                        JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		outputTextArea.setEditable(false);
 		
 		// Generate button
-		JButton generateButton = new JButton("Generate");
+		generateButton = new JButton("Generate");
 		generateButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
 		generateButton.setFocusable(false);
 		
 		// Labels
-		JLabel inputLabel = new JLabel("Input", JLabel.CENTER);
-		JLabel outputLabel = new JLabel("Output", JLabel.CENTER);
-		inputLabel.setLabelFor(inputTextArea);
-		inputLabel.setHorizontalTextPosition(JLabel.CENTER);
+		inputLabel = new JLabel("Input");
+		outputLabel = new JLabel("Output");
 		inputLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		outputLabel.setLabelFor(outputTextArea);
-		outputLabel.setHorizontalTextPosition(JLabel.CENTER);
+		inputLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		inputLabel.setLabelFor(inputTextArea);
 		outputLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		outputLabel.setFont(new Font("Serif", Font.BOLD, 15));
+		outputLabel.setLabelFor(outputTextArea);
 		
 		// Lay out input text area
-        JPanel inputPane = new JPanel();
+        inputPane = new JPanel();
         inputPane.setLayout(new BoxLayout(inputPane, BoxLayout.PAGE_AXIS));
         inputPane.add(inputLabel);
         inputPane.add(Box.createRigidArea(new Dimension(0,5)));
         inputPane.add(inputScroll);
-        inputPane.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        inputPane.setBorder(BorderFactory.createEmptyBorder(10,50,10,50));
         
         // Lay out output text area
-        JPanel outputPane = new JPanel();
+        outputPane = new JPanel();
         outputPane.setLayout(new BoxLayout(outputPane, BoxLayout.PAGE_AXIS));
         outputPane.add(outputLabel);
         outputPane.add(Box.createRigidArea(new Dimension(0,5)));
         outputPane.add(outputScroll);
-        outputPane.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        outputPane.setBorder(BorderFactory.createEmptyBorder(10,50,10,50));
 
         //Lay out the generate button.
-        JPanel buttonPane = new JPanel();
+        buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.PAGE_AXIS));
         buttonPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         buttonPane.add(Box.createHorizontalGlue());
