@@ -25,31 +25,6 @@ public class Frame extends JFrame
 		inputTextArea = new JTextArea(14, 40);
 		inputTextArea.setFont(new Font("Consolas", Font.PLAIN, 14));
 		inputTextArea.setTabSize(4);
-		
-		/* FOR TESTING */
-		inputTextArea.setText("public class ParticipantSO implements StringSerializable {\r\n" + 
-				"    private String m_participantID;\r\n" + 
-				"    private String m_name;\r\n" + 
-				"    private String m_group;\r\n" + 
-				"    private String m_software;\r\n" + 
-				"    private String m_version;\r\n" + 
-				"    private int m_availability;\r\n" + 
-				"    private int m_capacity;\r\n" + 
-				"    private long m_lastSeen;\r\n" + 
-				"    private long m_lastUpdated;\r\n" + 
-				"    private int m_valid;\r\n" + 
-				"    private int m_disabled;\r\n" + 
-				"    private int m_activeTestcases;\r\n" + 
-				"    private String m_levelOfAutomation;\r\n" + 
-				"    private String m_excludedParticipants;\r\n" + 
-				"    private String m_capabilities;\r\n" + 
-				"\r\n" + 
-				"    private String m_excludedParticipantsShadowField;\r\n" + 
-				"    private Set m_excludedParticipantsSet;\r\n" + 
-				"    private String m_capabilitiesShadowField;\r\n" + 
-				"    private ParticipantConstants.Capability[] m_capabilitiesSet;");
-		/* FOR TESTING */
-		
 		outputTextArea = new JTextArea(10, 40);
 		outputTextArea.setFont(new Font("Consolas", Font.PLAIN, 14));
 		outputTextArea.setTabSize(4);

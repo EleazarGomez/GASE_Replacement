@@ -51,12 +51,17 @@ public class Logic
 					result.add(codeElements.get(i));
 				}
 			}
+			else
+			{
+				break;
+			}
 		}
 		
 		codeElements = result;
 	}
 	
 	// Syntax checking can be improved (keyword class names, implements, variable declarations)
+	// Format (starting with comments, members start with m_)
 	private boolean checkFormat()
 	{
 		boolean first = true;
@@ -126,7 +131,18 @@ public class Logic
 			{
 				String secondToLast = words[words.length - 2];
 				String last = words[words.length - 1];
-				String result = secondToLast + " " + last.substring(0, last.length() - 1);
+				
+				String result = secondToLast + " " + last.substring(0, last.length() - 1) + " ";
+				
+				if (last.charAt(1) == '_')
+				{
+					result += last.substring(2, last.length() - 1);
+				}
+				else
+				{
+					result += last.substring(1, last.length() - 1);
+				}
+				
 				classMembers.add(result);
 			}
 		}
@@ -150,18 +166,72 @@ public class Logic
 		workingResult += "\t */\n";
 		workingResult += "\tpublic " + className + "(";
 		
+		// Parameter constructor header
 		for (int i = 0; i < classMembers.size(); i++)
 		{
+			String[] words = classMembers.get(i).split(" ");
+			workingResult += words[0] + " " + words[2];
 			
+			if (i == classMembers.size() - 1)
+			{
+				workingResult += ") {\n";
+			}
+			else
+			{
+				workingResult += ", ";
+			}
 		}
 		
+		// Parameter constructor body
+		for (int i = 0; i < classMembers.size(); i++)
+		{
+			String[] words = classMembers.get(i).split(" ");
+			workingResult += "\t\tthis." + words[1] + " = " + words[2] + ";\n";
+		}
 		
+		workingResult += "\t}\n";
+		workingResult += "\n";
+		workingResult += "\n";
+		workingResult += "\t// Getters and setters\n";
 		
+		for (int i = 0; i < classMembers.size(); i++)
+		{
+			String[] words = classMembers.get(i).split(" ");
+			
+			// Getter
+			workingResult += "\tpublic final " + words[0] + " get" + Character.toUpperCase(words[2].charAt(0)) +
+					         words[2].substring(1) + "() {\n";
+			workingResult += "\t\treturn " + words[1] + ";\n";
+			workingResult += "\t}\n";
+			
+			// Setter
+			workingResult += "\tpublic final void set" + Character.toUpperCase(words[2].charAt(0)) + 
+					          words[2].substring(1) + "(" + words[0] + " " + words[2] + ") {\n";
+			workingResult += "\t\tthis." + words[1] + " = " + words[2] + ";\n";
+			workingResult += "\t}\n";
+		}
 		
+		workingResult += "\n";
+		workingResult += "\n";
+		workingResult += "\t// toString\n";
+		workingResult += "\tpublic String toString() {\n";
+		workingResult += "\t\tStringBuffer ret = new StringBuffer();\n";
+		workingResult += "\t\tret.append(\"" + className + ": \");\n";
 		
+		for (int i = 0; i < classMembers.size(); i++)
+		{
+			String[] words = classMembers.get(i).split(" ");
+			workingResult += "\t\tret.append(\"" + words[2] + "=\").append(" + words[1] +
+					         ").append(\"; \");\n";
+		}
+		
+		workingResult += "\t\treturn ret.toString();\n";
+		workingResult += "\t}\n";
+		
+		// Something
 		workingResult += "\t\n";
-		workingResult += "\t\n";
-		workingResult += "\t\n";
+		// Nothing
+		workingResult += "\n";
 		
 		GASEresult = workingResult;
 	}
